@@ -1,2 +1,4 @@
-node_modules/
-shots/
+.vscode/
+.idea/
+*.log
+.dev/server.log

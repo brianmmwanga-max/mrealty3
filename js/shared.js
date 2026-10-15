@@ -89,7 +89,7 @@ const MRShared = (() => {
             allocation lists and pre-release pricing before public launch.</p>
           </div>
           <form class="news-form" data-newsletter>
-            <input type="email" required placeholder="Your email address" aria-label="Email address" />
+            <input type="email" name="email" required placeholder="Your email address" aria-label="Email address" />
             <button type="submit">Request Access</button>
           </form>
         </div>
@@ -284,6 +284,15 @@ const MRShared = (() => {
         f.innerHTML = '<p style="color:#c5a059;font-size:14px">Request received — our register opens weekly.</p>';
       })
     );
+
+    // delegate data-notify forms added after mount (injected content)
+    document.addEventListener("submit", (e) => {
+      const f = e.target;
+      if (f.matches && f.matches("form[data-notify]") && !f.dataset.wired) {
+        f.dataset.wired = "1";
+        wireForm(f, f.dataset.notify);
+      }
+    }, true);
 
     // reveal on scroll
     const io = new IntersectionObserver(

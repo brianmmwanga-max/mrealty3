@@ -1362,3 +1362,140 @@ input[type="range"]::-moz-range-thumb {
 }
 
 ::selection { background: var(--gold); color: var(--navy); }
+
+/* ============================================================
+   V2 — Logo images, WhatsApp, glassmorphism, 3D motion,
+   utility classes, new-page components
+   ============================================================ */
+
+:root { --wa-green: #1faa53; }
+
+/* ---------- logo (image-based, aspect ratio preserved) ---------- */
+.logo__img { height: 46px; width: auto; display: block; transition: opacity .25s ease; }
+.logo:hover .logo__img { opacity: .82; }
+.logo__img--footer { height: 38px; filter: brightness(0) invert(1); opacity: .96; }
+@media (max-width: 720px) { .logo__img { height: 38px; } }
+
+/* ---------- buttons ---------- */
+.btn--wa {
+  background: var(--wa-green); color: #fff; border: 1px solid transparent;
+  letter-spacing: .08em;
+}
+.btn--wa:hover { background: #178a44; transform: translateY(-1px); box-shadow: 0 8px 22px rgba(31,170,83,.28); }
+.btn--outline-gold {
+  background: transparent; color: var(--gold); border: 1px solid var(--gold);
+}
+.btn--outline-gold:hover { background: var(--gold); color: var(--navy); }
+
+/* ---------- floating WhatsApp launcher ---------- */
+.wa-float {
+  position: fixed; right: 22px; bottom: 96px; z-index: 89;
+  width: 52px; height: 52px; display: grid; place-items: center;
+  background: var(--wa-green); color: #fff; border-radius: 50%;
+  box-shadow: 0 10px 26px rgba(0,0,0,.22);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.wa-float:hover { transform: scale(1.08) translateY(-2px); box-shadow: 0 14px 32px rgba(31,170,83,.4); }
+@media (max-width: 640px) { .wa-float { bottom: 88px; right: 14px; width: 46px; height: 46px; } }
+
+/* ---------- hero: parallax + subtle 3D tilt ---------- */
+.hero__media { will-change: transform; }
+.hero__media img {
+  transform: translate3d(0, var(--py, 0), 0) perspective(1200px)
+             rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1.06);
+  transition: transform .35s cubic-bezier(.22,.61,.36,1);
+  transform-origin: center;
+}
+
+/* ---------- glassmorphism search panel ---------- */
+.search-panel {
+  background: rgba(255,255,255,.09);
+  backdrop-filter: blur(14px) saturate(1.35);
+  -webkit-backdrop-filter: blur(14px) saturate(1.35);
+  border: 1px solid rgba(255,255,255,.22);
+  box-shadow: 0 24px 64px rgba(4,12,26,.45);
+}
+.concierge {
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+}
+
+/* ---------- card hover: gold glow lift + transform reset for tilt ---------- */
+.card { transition: transform .45s cubic-bezier(.22,.61,.36,1), box-shadow .45s ease; transform-style: preserve-3d; }
+.card:hover { box-shadow: 0 18px 44px rgba(10,28,58,.16), 0 0 0 1px rgba(197,160,89,.45), 0 0 26px rgba(197,160,89,.14); }
+.card::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px;
+  background: linear-gradient(90deg, var(--gold), rgba(197,160,89,.15));
+  transform: scaleX(0); transform-origin: left; transition: transform .5s ease; pointer-events: none;
+}
+.card:hover::after { transform: scaleX(1); }
+
+/* ---------- concierge CTA message ---------- */
+.msg--cta {
+  display: inline-block; margin-top: 6px; padding: 8px 14px;
+  border: 1px solid var(--gold); color: var(--gold); font-size: 13px;
+  letter-spacing: .08em; text-transform: uppercase;
+}
+.msg--cta:hover { background: var(--gold); color: var(--navy); }
+
+/* ---------- utilities (replace inline styles over time) ---------- */
+.mt-14 { margin-top: 14px; }
+.h-section { font-family: var(--serif); font-size: 28px; font-weight: 600; color: var(--navy); margin-bottom: 22px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.def-list dt { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-top: 18px; }
+.def-list dd { font-size: 15px; color: var(--navy); margin: 4px 0 0; line-height: 1.6; }
+.def-list a:hover { color: var(--gold); }
+
+/* ---------- listing hub tabs ---------- */
+.hub-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 28px; overflow-x: auto; scrollbar-width: none; }
+.hub-tabs button {
+  appearance: none; background: none; border: 0; cursor: pointer;
+  padding: 14px 20px 12px; font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); position: relative; white-space: nowrap; transition: color .25s ease;
+}
+.hub-tabs button::after {
+  content: ""; position: absolute; left: 16px; right: 16px; bottom: -1px; height: 2px;
+  background: var(--gold); transform: scaleX(0); transition: transform .3s ease;
+}
+.hub-tabs button:hover { color: var(--navy); }
+.hub-tabs button.is-active { color: var(--navy); }
+.hub-tabs button.is-active::after { transform: scaleX(1); }
+
+/* ---------- timeline (project status) ---------- */
+.timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+.timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 1px; background: var(--line); }
+.timeline li { position: relative; padding: 0 0 26px 30px; }
+.timeline li::before {
+  content: ""; position: absolute; left: 2px; top: 5px; width: 11px; height: 11px;
+  border-radius: 50%; background: #fff; border: 1.5px solid var(--line);
+}
+.timeline li.done::before { background: var(--gold); border-color: var(--gold); }
+.timeline li.now::before { background: var(--navy); border-color: var(--navy); box-shadow: 0 0 0 4px rgba(10,28,58,.12); }
+.timeline b { display: block; font-size: 15px; color: var(--navy); font-weight: 600; }
+.timeline span { font-size: 13.5px; color: var(--muted); }
+
+/* ---------- payment plan table ---------- */
+.plan-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.plan-table th { text-align: left; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); padding: 10px 14px 10px 0; border-bottom: 1px solid var(--line); }
+.plan-table td { padding: 14px 14px 14px 0; border-bottom: 1px solid var(--line); color: var(--navy); }
+.plan-table tr:hover td { background: rgba(197,160,89,.06); }
+
+/* ---------- yield calculator ---------- */
+.yield-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: start; }
+.yield-out { border-left: 2px solid var(--gold); padding-left: 28px; }
+.yield-big { font-family: var(--serif); font-size: 54px; color: var(--navy); line-height: 1; }
+.yield-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+.yield-row b { color: var(--navy); }
+@media (max-width: 900px) { .yield-grid { grid-template-columns: 1fr; } .yield-out { border-left: 0; border-top: 2px solid var(--gold); padding: 24px 0 0; } }
+
+/* ---------- legal pages ---------- */
+.legal-body { max-width: 72ch; }
+.legal-body h2 { font-family: var(--serif); font-size: 24px; color: var(--navy); margin: 40px 0 12px; }
+.legal-body p, .legal-body li { font-size: 15px; line-height: 1.75; color: #3c4657; margin-bottom: 12px; }
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero__media img { transform: translate3d(0, var(--py, 0), 0) scale(1.06); }
+  .card, .card::after, .btn, .wa-float { transition: none; }
+}

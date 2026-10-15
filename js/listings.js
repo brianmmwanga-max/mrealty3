@@ -26,6 +26,27 @@
   const params = new URLSearchParams(location.search);
   let view = "grid";
 
+  /* ---------- collection tabs (state used by apply) ---------- */
+  let tab = params.get("tab") || "all";
+  const TABS = {
+    all: () => true,
+    launches: (p) => (Date.now() - new Date(p.listed)) < 1000 * 60 * 60 * 24 * 120,
+    offplan: (p) => p.status === "Off-Plan",
+    completed: (p) => p.featuredProject && p.status !== "Off-Plan",
+    developments: (p) => !!p.featuredProject
+  };
+  if (!TABS[tab]) tab = "all";
+  function setTab(t) {
+    tab = t;
+    const tabsEl = document.getElementById("hub-tabs");
+    tabsEl.querySelectorAll("button").forEach((b) => {
+      b.classList.toggle("is-active", b.dataset.tab === t);
+      b.setAttribute("aria-selected", String(b.dataset.tab === t));
+    });
+    apply();
+  }
+
+
   function setView(v) {
     view = v;
     grid.classList.toggle("is-list", v === "list");
@@ -62,6 +83,7 @@
     els.maxOut.textContent = f.max >= Number(els.max.max) ? "No limit" : MR.currency(f.max);
 
     let list = MR.properties.filter((p) => {
+      if (!TABS[tab](p)) return false;
       if (f.q && !(p.title + " " + p.address + " " + p.location + " " + p.type).toLowerCase().includes(f.q)) return false;
       if (f.location && p.location !== f.location) return false;
       if (f.type && p.type !== f.type) return false;
@@ -142,5 +164,15 @@
 
   MRShared.bindFavButtons(grid);
   setView(view);
+  document.getElementById("hub-tabs").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-tab]");
+    if (b) setTab(b.dataset.tab);
+  });
+  // reflect initial tab in the UI without double-applying
+  document.getElementById("hub-tabs").querySelectorAll("button").forEach((b) => {
+    b.classList.toggle("is-active", b.dataset.tab === tab);
+    b.setAttribute("aria-selected", String(b.dataset.tab === tab));
+  });
   apply();
+
 })();

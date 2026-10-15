@@ -101,3 +101,49 @@
       .join("");
   }
 })();
+
+
+/* ---------- cinematic hero: scroll parallax + pointer 3D tilt ---------- */
+(() => {
+  const media = document.getElementById("hero-media");
+  if (!media) return;
+  let raf = null;
+  addEventListener("scroll", () => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      media.style.setProperty("--py", Math.min(scrollY * 0.25, 160) + "px");
+      raf = null;
+    });
+  }, { passive: true });
+  addEventListener("pointermove", (e) => {
+    const rx = (e.clientY / innerHeight - 0.5) * -3;
+    const ry = (e.clientX / innerWidth - 0.5) * 4;
+    media.style.setProperty("--rx", rx.toFixed(2) + "deg");
+    media.style.setProperty("--ry", ry.toFixed(2) + "deg");
+  });
+})();
+
+/* ---------- 3D tilt on featured cards ---------- */
+(() => {
+  const fine = matchMedia("(hover:hover) and (pointer:fine)").matches;
+  if (!fine) return;
+  document.addEventListener("mouseover", (e) => {
+    const card = e.target.closest(".card, .proj-card");
+    if (!card || card.dataset.tilt === "on") return;
+    card.dataset.tilt = "on";
+    const move = (ev) => {
+      const r = card.getBoundingClientRect();
+      const px = (ev.clientX - r.left) / r.width - 0.5;
+      const py = (ev.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(900px) rotateY(${px * 5}deg) rotateX(${-py * 5}deg) translateY(-4px)`;
+    };
+    const leave = () => {
+      card.style.transform = "";
+      card.removeEventListener("mousemove", move);
+      card.removeEventListener("mouseleave", leave);
+      card.dataset.tilt = "off";
+    };
+    card.addEventListener("mousemove", move);
+    card.addEventListener("mouseleave", leave);
+  });
+})();

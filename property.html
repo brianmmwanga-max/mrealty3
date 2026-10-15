@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a1c3a'/%3E%3Ctext x='16' y='23' font-family='Georgia' font-size='20' fill='%23c5a059' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/img/favicon.png" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -33,7 +33,7 @@
   <section class="gallery" id="gallery" aria-label="Property photo gallery"></section>
 
   <!-- Main layout -->
-  <main class="wrap" style="padding-block:48px 96px">
+  <main class="wrap pd-main" data-property-id="">
     <div class="pd-layout">
       <article>
         <nav class="breadcrumb" style="color:var(--muted)" aria-label="Breadcrumb">
@@ -82,17 +82,18 @@
           <div class="side-card__head">Enquire About This Property</div>
           <div class="side-card__body">
             <div id="side-agent" style="margin-bottom:20px"></div>
-            <form class="inquiry-form" id="inquiry-form">
+            <form class="inquiry-form" id="inquiry-form" data-notify="Property enquiry">
               <input type="hidden" name="property" />
-              <input type="text" required placeholder="Full name" aria-label="Full name" />
-              <input type="email" required placeholder="Email address" aria-label="Email address" />
-              <input type="tel" placeholder="Phone (optional)" aria-label="Phone" />
-              <select aria-label="Preferred contact time">
+              <input type="text" name="name" required placeholder="Full name" aria-label="Full name" />
+              <input type="email" name="email" required placeholder="Email address" aria-label="Email address" />
+              <input type="tel" name="phone" placeholder="Phone (optional)" aria-label="Phone" />
+              <select name="contact-window" aria-label="Preferred contact time">
                 <option>Preferred contact window</option>
                 <option>Morning</option><option>Afternoon</option><option>Evening</option>
               </select>
-              <textarea placeholder="Tell us about your timeline and requirements…" aria-label="Message"></textarea>
+              <textarea name="message" placeholder="Tell us about your timeline and requirements…" aria-label="Message"></textarea>
               <button class="btn btn--gold" type="submit">Send Enquiry</button>
+              <a class="btn btn--wa" id="pd-wa" href="#" target="_blank" rel="noopener">WhatsApp Enquiry</a>
               <p class="form-note">One named adviser replies — never a call centre. Typical response: same working day.</p>
             </form>
           </div>
@@ -159,7 +160,9 @@
     </div>
   </div>
 
+  <script src="js/config.js"></script>
   <script src="js/data.js"></script>
+  <script src="js/notify.js"></script>
   <script src="js/shared.js"></script>
   <script src="js/property.js"></script>
   <script>MRShared.mount("listings");</script>

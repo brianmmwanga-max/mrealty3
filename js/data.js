@@ -31,7 +31,7 @@ MR.properties = [
     ],
     floorPlan: "assets/img/floorplan-4bed.jpg",
     videoId: "aqz-KE-bpKQ",
-    agent: "m.wanjiru",
+    agent: "b.mwangi",
     blurb:
       "A duplex penthouse occupying the upper two floors of Gemini Residences, with a 90 m² private terrace and uninterrupted views toward the Ngong Hills.",
     description:
@@ -68,7 +68,7 @@ MR.properties = [
     ],
     floorPlan: "assets/img/floorplan-3bed.jpg",
     videoId: "aqz-KE-bpKQ",
-    agent: "d.otieno",
+    agent: "m.wanjiru",
     blurb:
       "A three-bedroom corner unit with wrap-around glazing, open to morning light over the park and evening sun across the ridge.",
     description:
@@ -105,7 +105,7 @@ MR.properties = [
     ],
     floorPlan: "assets/img/floorplan-2bed.jpg",
     videoId: "aqz-KE-bpKQ",
-    agent: "s.njoroge",
+    agent: "d.otieno",
     blurb:
       "Ground-floor apartment opening onto a private landscaped courtyard, five minutes from Yaya Centre.",
     description:
@@ -143,7 +143,7 @@ MR.properties = [
     ],
     floorPlan: "assets/img/floorplan-villa.jpg",
     videoId: "aqz-KE-bpKQ",
-    agent: "m.wanjiru",
+    agent: "s.njoroge",
     blurb:
       "A contemporary villa on a quarter-acre plot, arranged around a shaded courtyard and infinity pool.",
     description:
@@ -180,7 +180,7 @@ MR.properties = [
     ],
     floorPlan: "assets/img/floorplan-townhouse.jpg",
     videoId: "aqz-KE-bpKQ",
-    agent: "a.kimani",
+    agent: "b.mwangi",
     blurb:
       "Three-storey townhouse around an internal courtyard — completing Q4 2027, staged payments to 60% on structure.",
     description:
@@ -216,7 +216,7 @@ MR.properties = [
     ],
     floorPlan: "assets/img/floorplan-1bed.jpg",
     videoId: "aqz-KE-bpKQ",
-    agent: "s.njoroge",
+    agent: "m.wanjiru",
     blurb:
       "A tightly-detailed one bedroom on an upper floor — a pied-à-terre or a dependable rental yield asset.",
     description:
@@ -285,7 +285,7 @@ MR.properties = [
     ],
     floorPlan: "assets/img/floorplan-villa.jpg",
     videoId: "aqz-KE-bpKQ",
-    agent: "a.kimani",
+    agent: "s.njoroge",
     blurb:
       "A 1974 brick bungalow sympathetically rebuilt — original character, entirely new services.",
     description:
@@ -322,7 +322,7 @@ MR.properties = [
     ],
     floorPlan: "assets/img/floorplan-3bed.jpg",
     videoId: "aqz-KE-bpKQ",
-    agent: "d.otieno",
+    agent: "b.mwangi",
     blurb:
       "A converted office penthouse in the CBD — loft volumes, restored terrazzo, and rooftop access.",
     description:
@@ -405,24 +405,34 @@ MR.stats = [
 
 MR.agents = [
   {
+    id: "b.mwangi",
+    name: "Brian Mwangi",
+    role: "Founder & Principal Realtor",
+    focus: "Development sales, prime resale & investment advisory",
+    phone: "+254 183 255543",
+    email: "contacts.mrealtyke@gmail.com",
+    photo: "assets/img/agent-1.jpg",
+    bio: "Founder of M Realty. Fifteen years advising on high-value residential transactions across Westlands, Kilimani and Karen. Leads the firm's development mandates personally, including The Gemini Project."
+  },
+  {
     id: "m.wanjiru",
     name: "Muthoni Wanjiru",
-    role: "Principal Advisor",
-    focus: "Prime residential & penthouses",
+    role: "Senior Sales Consultant",
+    focus: "Penthouses & corner units",
     phone: "+254 720 100 001",
     email: "muthoni@mrealty.co.ke",
-    photo: "assets/img/agent-1.jpg",
-    bio: "Fifteen years advising on high-value residential transactions in Westlands and Karen. Formerly head of residential at a regional brokerage."
+    photo: "assets/img/agent-2.jpg",
+    bio: "Runs the prime apartment desk. Known for disciplined allocation processes and honest exit valuations."
   },
   {
     id: "d.otieno",
     name: "David Otieno",
-    role: "Senior Sales Consultant",
-    focus: "New developments & off-plan",
+    role: "Off-Plan Specialist",
+    focus: "New developments & phased payment plans",
     phone: "+254 720 100 002",
     email: "david@mrealty.co.ke",
-    photo: "assets/img/agent-2.jpg",
-    bio: "Leads sales mandates for Gemini and The Quarter. Known for disciplined allocation processes and honest exit valuations."
+    photo: "assets/img/agent-3.jpg",
+    bio: "Leads off-plan sales mandates and buyer education on construction milestones and escrow structures."
   },
   {
     id: "s.njoroge",
@@ -431,18 +441,8 @@ MR.agents = [
     focus: "Yield analysis & institutional lets",
     phone: "+254 720 100 003",
     email: "sarah@mrealty.co.ke",
-    photo: "assets/img/agent-3.jpg",
-    bio: "Manages a 90-unit rental book and prepares acquisition cases for diaspora and regional investors."
-  },
-  {
-    id: "a.kimani",
-    name: "Andrew Kimani",
-    role: "Development Advisory",
-    focus: "Feasibility, land & entitlements",
-    phone: "+254 720 100 004",
-    email: "andrew@mrealty.co.ke",
     photo: "assets/img/agent-4.jpg",
-    bio: "Advises landowners on highest-and-best use. Ten feasibility studies approved for construction in the last four years."
+    bio: "Manages a 90-unit rental book and prepares acquisition cases for diaspora and regional investors."
   }
 ];
 

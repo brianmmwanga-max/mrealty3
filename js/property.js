@@ -129,6 +129,8 @@
     <div class="agent-card__contact" style="margin-top:16px">
       <a href="tel:${agent.phone.replace(/\s/g, "")}">${MRShared.ICONS.phone}${agent.phone}</a>
       <a href="mailto:${agent.email}">${MRShared.ICONS.mail}${agent.email}</a>
+      <a href="${MRCONFIG.waText('Hello ' + agent.name + ', I am enquiring about ' + p.title + ' (' + p.id.toUpperCase() + ').')}"
+         target="_blank" rel="noopener">WhatsApp</a>
     </div>`;
 
   /* ---------- save button on detail page ---------- */
@@ -145,11 +147,10 @@
   inq.querySelector("input[name=property]").value = `${p.title} (${p.id.toUpperCase()})`;
   const lead = JSON.parse(localStorage.getItem("mr_lead") || "null");
   if (lead && lead.email) inq.querySelector("input[type=email]").value = lead.email;
-  inq.addEventListener("submit", (e) => {
-    e.preventDefault();
-    inq.outerHTML = `<div class="form-ok">Enquiry received. ${agent.name.split(" ")[0]} will contact you
-      within one working day regarding ${p.title}.</div>`;
-  });
+  document.querySelector(".pd-main").dataset.propertyId = `${p.title} (${p.id.toUpperCase()})`;
+  const waBtn = document.getElementById("pd-wa");
+  waBtn.href = MRCONFIG.waText(
+    `Hello M Realty — I'd like to enquire about "${p.title}" (${p.id.toUpperCase()}, ${MR.currency(p.price)}) listed on your website.`);
 
   /* ---------- mortgage calculator ---------- */
   const priceInput = document.getElementById("mc-price");

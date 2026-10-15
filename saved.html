@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a1c3a'/%3E%3Ctext x='16' y='23' font-family='Georgia' font-size='20' fill='%23c5a059' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/img/favicon.png" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -28,6 +28,8 @@
       <div class="listings-toolbar">
         <span class="result-count" id="saved-count"></span>
         <div class="toolbar-controls">
+          <button class="btn btn--gold" id="share-saved" type="button">Share Shortlist with an Adviser</button>
+          <a class="btn btn--wa" id="wa-saved" href="#" target="_blank" rel="noopener">WhatsApp</a>
           <button class="btn btn--outline" id="clear-saved" type="button">Clear Shortlist</button>
         </div>
       </div>
@@ -42,7 +44,9 @@
     </div>
   </section>
 
+  <script src="js/config.js"></script>
   <script src="js/data.js"></script>
+  <script src="js/notify.js"></script>
   <script src="js/shared.js"></script>
   <script>
     (() => {
@@ -58,6 +62,30 @@
         empty.hidden = !!list.length;
         count.innerHTML = `<strong>${list.length}</strong> ${list.length === 1 ? "asset" : "assets"} on your shortlist`;
       }
+      function shortlistText() {
+        const list = MRShared.getSaved().map(MR.byId).filter(Boolean);
+        if (!list.length) return null;
+        const lines = list.map((p, i) =>
+          `${i + 1}. ${p.title} — ${p.address} · ${p.beds}BR/${p.baths}BA · ${MR.currency(p.price)} (${p.id.toUpperCase()})`);
+        return "M Realty shortlist:\n" + lines.join("\n");
+      }
+      document.getElementById("share-saved").addEventListener("click", async (e) => {
+        const text = shortlistText();
+        if (!text) return;
+        const btn = e.currentTarget;
+        if (navigator.share) {
+          try { await navigator.share({ title: "My M Realty shortlist", text }); return; } catch (_) {}
+        }
+        await MRNotify.send("Shortlist shared", { items: text.split("\n").length - 1, details: text });
+        btn.textContent = "Sent — thank you";
+        btn.disabled = true;
+      });
+      function refreshWa() {
+        const text = shortlistText();
+        document.getElementById("wa-saved").href = text ? MRCONFIG.waText(text) : MRCONFIG.whatsappLink;
+      }
+      document.addEventListener("mr:saved-changed", refreshWa);
+      refreshWa();
       MRShared.bindFavButtons(grid);
       document.getElementById("clear-saved").addEventListener("click", () => {
         localStorage.setItem("mr_saved", "[]");
@@ -67,7 +95,7 @@
       document.addEventListener("mr:saved-changed", render);
       render();
     })();
-    MRShared.mount("home");
+    MRShared.mount("saved");
   </script>
 </body>
 </html>

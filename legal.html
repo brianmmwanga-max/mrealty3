@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy &amp; Terms — M Realty</title>
+  <meta name="description" content="M Realty privacy policy, terms of service, data protection (Kenya DPA 2019) and ethical sales standards." />
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/img/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Legal &amp; Standards</p>
+      <h1 class="display">Plain language, kept to.</h1>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap legal-body">
+
+      <h2 id="privacy">Privacy Policy</h2>
+      <p><em>Last reviewed: October 2026.</em></p>
+      <p>M Realty Ltd ("we", "the firm") collects only what is needed to respond to your enquiry:
+        your name, email, phone (optional), the property or interest you mention, and any message you
+        choose to include. Enquiries submitted through this website are delivered by our form backend
+        to <span data-cfg="email"></span> and, where enabled, mirrored as a WhatsApp notification to
+        the firm's business line.</p>
+      <p>We do not sell, rent or trade personal data. Data is retained for 24 months after last contact,
+        then deleted. Newsletter registrations ("Off-Market Access") can be revoked at any time by
+        replying UNSTOP to any message or emailing the above address.</p>
+      <p>This site uses no advertising trackers and no third-party analytics cookies. Saved Properties
+        are stored in your own browser's local storage and never leave your device unless you submit
+        an enquiry.</p>
+
+      <h2 id="data">Data Protection (Kenya)</h2>
+      <p>In line with the Data Protection Act, 2019, we act as data controller for information you
+        provide. You may request access, correction or erasure of your data by writing to
+        <span data-cfg="email"></span>. Complaints may be referred to the Office of the Data Protection
+        Commissioner. Our lawful basis for processing enquiry data is contractual necessity and your
+        consent.</p>
+
+      <h2 id="terms">Terms of Service</h2>
+      <p>Content on this website — including prices, yields, availability and construction milestones —
+        is indicative, prepared in good faith, and subject to change without notice. It does not
+        constitute financial, legal or tax advice. Listed prices exclude statutory charges (stamp duty,
+        legal fees, VAT where applicable) unless stated.</p>
+      <p>Property references, imagery and floor plans remain the intellectual property of M Realty and
+        the respective developers. Reproduction without written permission is prohibited. The firm
+        accepts no liability for decisions taken on the basis of website content; formal particulars
+        are issued only through engagement letters and sale agreements.</p>
+
+      <h2 id="ethics">Ethical Sales Standard</h2>
+      <ul>
+        <li>No fabricated urgency. Allocation lists reflect genuine demand, and we say so when they don't.</li>
+        <li>No undisclosed dual agency. Where we represent both sides, it is disclosed in writing before offers.</li>
+        <li>No off-register deposits. All payments go to escrow or titled accounts named in the contract.</li>
+        <li>We talk clients out of purchases that fail the exit-liquidity test, even when the fee is ours.</li>
+      </ul>
+
+      <p style="margin-top:40px">Questions about any of the above: write to
+        <a href="#" data-cfg-mailto></a> or call <a href="#" data-cfg-tel></a>.</p>
+    </div>
+  </section>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/notify.js"></script>
+  <script src="js/shared.js"></script>
+  <script>
+    (() => {
+      const CFG = window.MRCONFIG;
+      document.querySelectorAll("[data-cfg='email']").forEach((e) => (e.textContent = CFG.email));
+      const m = document.querySelector("[data-cfg-mailto]");
+      m.textContent = CFG.email; m.href = "mailto:" + CFG.email;
+      const t = document.querySelector("[data-cfg-tel]");
+      t.textContent = CFG.phoneDisplay; t.href = CFG.phoneHref;
+    })();
+    MRShared.mount("legal");
+  </script>
+</body>
+</html>
