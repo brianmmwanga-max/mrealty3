@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saved Properties | M Realty</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a1c3a'/%3E%3Ctext x='16' y='23' font-family='Georgia' font-size='20' fill='%23c5a059' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a> / Saved</nav>
+      <p class="eyebrow">Your Shortlist</p>
+      <h1 class="display" style="margin-top:16px">Saved properties.</h1>
+      <p class="lede">Held privately in this browser. Send the shortlist to an adviser and we'll prepare
+        a comparables memo with running-yield figures for each asset.</p>
+    </div>
+  </section>
+
+  <section class="section--tight section" style="padding-top:48px">
+    <div class="wrap">
+      <div class="listings-toolbar">
+        <span class="result-count" id="saved-count"></span>
+        <div class="toolbar-controls">
+          <button class="btn btn--outline" id="clear-saved" type="button">Clear Shortlist</button>
+        </div>
+      </div>
+      <div class="property-grid" id="saved-grid" aria-live="polite"></div>
+      <div id="saved-empty" hidden>
+        <div class="empty-state">
+          <h3 class="display">Nothing saved yet.</h3>
+          <p>Tap the heart on any listing to build a private shortlist.</p>
+          <a class="btn btn--navy" href="listings.html">Browse the Register</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/data.js"></script>
+  <script src="js/shared.js"></script>
+  <script>
+    (() => {
+      const grid = document.getElementById("saved-grid");
+      const empty = document.getElementById("saved-empty");
+      const count = document.getElementById("saved-count");
+
+      function render() {
+        const ids = MRShared.getSaved();
+        const list = ids.map(MR.byId).filter(Boolean);
+        grid.innerHTML = list.map((p) => MRShared.cardHTML(p)).join("");
+        grid.hidden = !list.length;
+        empty.hidden = !!list.length;
+        count.innerHTML = `<strong>${list.length}</strong> ${list.length === 1 ? "asset" : "assets"} on your shortlist`;
+      }
+      MRShared.bindFavButtons(grid);
+      document.getElementById("clear-saved").addEventListener("click", () => {
+        localStorage.setItem("mr_saved", "[]");
+        MRShared.updateSavedCount();
+        render();
+      });
+      document.addEventListener("mr:saved-changed", render);
+      render();
+    })();
+    MRShared.mount("home");
+  </script>
+</body>
+</html>

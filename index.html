@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>M Realty — Exceptional Properties. Enduring Value.</title>
+  <meta name="description" content="M Realty is a Nairobi advisory for exceptional residential assets — development sales, prime resale, and institutional counsel." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a1c3a'/%3E%3Ctext x='16' y='23' font-family='Georgia' font-size='20' fill='%23c5a059' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero__media">
+      <img src="assets/img/hero.jpg" alt="Modern residential towers at dusk" fetchpriority="high" width="1920" height="1080" />
+      <div class="hero__scrim"></div>
+    </div>
+    <span class="hero__meta">Est. 2013 · Nairobi</span>
+
+    <div class="wrap hero__inner">
+      <p class="eyebrow">Residential Advisory &amp; Development Sales</p>
+      <h1 class="display">Exceptional Properties.<br /><em>Enduring Value.</em></h1>
+      <p class="hero__sub">We represent a deliberately small book of Nairobi residences —
+        measured in construction quality, not headline finishes. Search the current register below.</p>
+
+      <!-- Advanced search -->
+      <form class="search-panel" id="hero-search" aria-label="Property search">
+        <div class="search-panel__tabs" role="tablist">
+          <button type="button" class="is-active">Buy</button>
+          <button type="button">Off-Plan</button>
+          <button type="button">Invest</button>
+        </div>
+        <div class="search-panel__grid">
+          <div class="field field--noarrow">
+            <label for="hs-location">Location</label>
+            <select id="hs-location"><option>Any Location</option></select>
+          </div>
+          <div class="field field--noarrow">
+            <label for="hs-type">Property Type</label>
+            <select id="hs-type"><option>Any Type</option></select>
+          </div>
+          <div class="field field--noarrow">
+            <label for="hs-beds">Bedrooms</label>
+            <select id="hs-beds">
+              <option value="">Any</option>
+              <option value="1">1</option><option value="2">2</option>
+              <option value="3">3</option><option value="4">4</option>
+              <option value="5">5+</option>
+            </select>
+          </div>
+          <div class="field field--noarrow range-field">
+            <label for="hs-price">Max Price — <output id="hs-price-out">Any Price</output></label>
+            <input type="range" id="hs-price" min="5000000" max="100000000" step="1000000" value="100000000" />
+          </div>
+          <div class="search-panel__submit">
+            <button class="btn btn--navy" type="submit">Search Register</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ CURRENT REGISTER (preview) ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">The Current Register</p>
+          <h2 class="display" style="margin-top:14px">Recently released to market</h2>
+        </div>
+        <a class="link-arrow" href="listings.html">View all listings
+          <svg width="16" height="10" viewBox="0 0 24 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 5h21m-5-5 5 5-5 5"/></svg>
+        </a>
+      </div>
+      <div class="property-grid" id="featured-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED PROJECT: GEMINI ============ -->
+  <section class="section section--tight" style="padding-top:0">
+    <div class="wrap">
+      <article class="project-feature reveal">
+        <img src="assets/img/project-gemini-hero.jpg" alt="Gemini Residences, Park Lane Westlands — architectural render" loading="lazy" width="1920" height="1080" />
+        <div class="project-feature__content">
+          <p class="eyebrow">Featured Development</p>
+          <h2 class="display">The Gemini Project</h2>
+          <p>Two towers on Park Lane, at the edge of Brookside's parkland. 148 residences,
+            specified to age well — topping out Q3 2026, handover Q2 2027.</p>
+          <a class="btn btn--gold" href="project.html">Explore the Project</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ NUMBERS BEHIND M REALTY ============ -->
+  <section class="stats-band" id="numbers">
+    <div class="wrap">
+      <div class="stats-grid" id="home-stats"><!-- injected --></div>
+    </div>
+  </section>
+
+  <!-- ============ PHILOSOPHY EDITORIAL ============ -->
+  <section class="section">
+    <div class="wrap split">
+      <div class="prose">
+        <p class="eyebrow">How We Work</p>
+        <h2 class="display" style="margin-block:18px 22px">A short book,<br />held to a long standard.</h2>
+        <p>M Realty was founded on a simple dissatisfaction: listings described in adjectives
+          instead of specifications. We publish ceiling heights, parking ratios, acoustic test
+          results, and service histories — because that is what determines whether an asset holds
+          its value in fifteen years.</p>
+        <p>We take fewer mandates than our competitors and hold them longer. Sellers work with one
+          named adviser from first valuation to completion; buyers receive written comparables
+          before they are shown a door.</p>
+        <a class="link-arrow" href="about.html" style="margin-top:26px;display:inline-flex">Read our standards
+          <svg width="16" height="10" viewBox="0 0 24 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 5h21m-5-5 5 5-5 5"/></svg>
+        </a>
+      </div>
+      <figure class="figure figure--tall">
+        <img src="assets/img/prop-villa-3.jpg" alt="Villa exterior, Lavington" loading="lazy" width="900" height="1200" />
+        <figcaption class="figure__caption">Green Valley Rd · Listed 02 Sep 2026</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ NEIGHBOURHOOD GUIDES ============ -->
+  <section class="section section--stone">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Neighbourhood Guides</p>
+          <h2 class="display" style="margin-top:14px">Market intelligence, sub-market by sub-market</h2>
+        </div>
+        <span class="serif-num">Q3 2026 data</span>
+      </div>
+      <div class="nb-grid" id="nb-grid"><!-- injected --></div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIAL ============ -->
+  <section class="section section--navy">
+    <div class="wrap quote-block reveal">
+      <p class="eyebrow">Client Record</p>
+      <blockquote style="margin-top:26px">They talked me out of a penthouse I loved because the parking
+        ratio didn't support resale. Two years later the building next door — same price, better spec —
+        appraised fourteen per cent higher. That is the sort of adviser you want.</blockquote>
+      <cite>— Investor client, acquired at Meridian Towers</cite>
+    </div>
+  </section>
+
+  <script src="js/data.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/home.js"></script>
+  <script>MRShared.mount("home");</script>
+</body>
+</html>
