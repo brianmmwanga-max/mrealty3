@@ -1,0 +1,4 @@
+.vscode/
+.idea/
+*.log
+.dev/server.log

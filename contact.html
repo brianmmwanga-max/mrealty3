@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — M Realty | Park Lane Chambers, Westlands, Nairobi</title>
+  <meta name="description" content="Contact M Realty — book a viewing, request a valuation, or register for off-market access. Park Lane Chambers, 4th Floor, Westlands, Nairobi. +254 183 255543." />
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/img/favicon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="M Realty" />
+  <meta property="og:title" content="Contact M Realty" />
+  <meta property="og:description" content="Book a viewing or speak to Realtor Brian Mwangi. Park Lane Chambers, Westlands, Nairobi." />
+  <meta property="og:image" content="assets/img/hero.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Contact</p>
+      <h1 class="display">Speak to the desk.</h1>
+      <p class="page-head__sub">One office, one standard. Every enquiry is answered by a named adviser —
+        typically the same working day.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight" id="book">
+    <div class="wrap contact-grid">
+
+      <!-- Form -->
+      <div>
+        <h2 class="h-section">General Enquiry</h2>
+        <form class="inquiry-form" id="contact-form" data-notify="Contact enquiry" novalidate>
+          <div class="form-row">
+            <input type="text" name="name" required placeholder="Full name" aria-label="Full name" />
+            <input type="tel" name="phone" required placeholder="Phone" aria-label="Phone" />
+          </div>
+          <input type="email" name="email" required placeholder="Email address" aria-label="Email address" />
+          <select name="interest" aria-label="Enquiry type">
+            <option>Book a viewing</option>
+            <option>Sell / list my property</option>
+            <option>Investment advisory</option>
+            <option>Gemini — off-plan allocation</option>
+            <option>The Quarter — townhouses</option>
+          </select>
+          <select name="preferred-area" aria-label="Preferred sub-market">
+            <option>Preferred area (optional)</option>
+            <option>Westlands</option><option>Kilimani</option><option>Lavington</option>
+            <option>Karen</option><option>Runda</option><option>Downtown</option>
+          </select>
+          <textarea name="message" rows="5" placeholder="Budget band, timeline, and what matters most to you…" aria-label="Message"></textarea>
+          <div class="form-actions">
+            <button class="btn btn--gold" type="submit">Submit Enquiry</button>
+            <a class="btn btn--wa" id="cta-wa-direct" href="#" target="_blank" rel="noopener">WhatsApp us now</a>
+          </div>
+          <p class="form-note">By submitting you agree to be contacted about your enquiry. We never sell data, and you can unsubscribe from Off-Market Access at any time.</p>
+        </form>
+      </div>
+
+      <!-- Info + map -->
+      <div class="contact-info">
+        <h2 class="h-section">The Office</h2>
+        <dl class="def-list">
+          <dt>Address</dt><dd id="info-address">—</dd>
+          <dt>Telephone</dt><dd><a href="#" id="info-phone">—</a></dd>
+          <dt>Email</dt><dd><a href="#" id="info-email">—</a></dd>
+          <dt>Principal</dt><dd>Realtor Brian Mwangi, Founder</dd>
+          <dt>Hours</dt><dd id="info-hours">—</dd>
+        </dl>
+        <figure class="map-frame">
+          <iframe id="map-embed" title="Map — Park Lane Chambers, Westlands, Nairobi"
+                  src="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                  style="border:0" width="1200" height="420" allowfullscreen></iframe>
+          <figcaption class="figure__caption">Park Lane · Westlands</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Adviser quick contacts -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Direct Lines</p>
+          <h2 class="display mt-14">Prefer to call a desk?</h2>
+        </div>
+      </div>
+      <div class="agent-grid" id="contact-agents"></div>
+    </div>
+  </section>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/notify.js"></script>
+  <script src="js/shared.js"></script>
+  <script>
+    (() => {
+      const CFG = window.MRCONFIG;
+
+      /* inject live contact details everywhere on this page */
+      document.getElementById("info-address").textContent = CFG.address;
+      const ph = document.getElementById("info-phone");
+      ph.textContent = CFG.phoneDisplay; ph.href = CFG.phoneHref;
+      const em = document.getElementById("info-email");
+      em.textContent = CFG.email; em.href = "mailto:" + CFG.email;
+      document.getElementById("info-hours").textContent = CFG.hours;
+      document.getElementById("map-embed").src = CFG.mapEmbed;
+      document.getElementById("cta-wa-direct").href = CFG.whatsappLink;
+
+      /* remember lead for concierge personalisation */
+      const form = document.getElementById("contact-form");
+      form.addEventListener("submit", () => {
+        const email = form.querySelector('input[name="email"]').value.trim();
+        const name = form.querySelector('input[name="name"]').value.trim();
+        if (email) localStorage.setItem("mr_lead", JSON.stringify({ name, email, ts: Date.now(), source: "contact" }));
+      });
+
+      document.getElementById("contact-agents").innerHTML = MR.agents.map((a) => `
+        <article class="agent-card">
+          <div class="agent-card__photo"><img src="${a.photo}" alt="${a.name}" loading="lazy" width="800" height="1000"/></div>
+          <div class="agent-card__body">
+            <h3 class="agent-card__name">${a.name}</h3>
+            <div class="agent-card__role">${a.role}</div>
+            <div class="agent-card__contact">
+              <a href="tel:${a.phone.replace(/\s/g,'')}">${MRShared.ICONS.phone}${a.phone}</a>
+              <a href="mailto:${a.email}">${MRShared.ICONS.mail}${a.email}</a>
+              <a href="${CFG.waText('Hello ' + a.name + ', I found you via the M Realty website.')}" target="_blank" rel="noopener">WhatsApp</a>
+            </div>
+          </div>
+        </article>`).join("");
+    })();
+    MRShared.mount("contact");
+  </script>
+</body>
+</html>

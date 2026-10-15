@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buying Off-Plan in Nairobi — M Realty Guide</title>
+  <meta name="description" content="How off-plan purchasing works in Kenya: escrow, phased payments, construction milestones, due diligence checklist, and current off-plan inventory from M Realty." />
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/img/favicon.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="M Realty" />
+  <meta property="og:title" content="Buying Off-Plan — M Realty Advisory Guide" />
+  <meta property="og:description" content="Escrow, phased payments, milestone verification and a due-diligence checklist for Nairobi off-plan buyers." />
+  <meta property="og:image" content="assets/img/project-gemini-hero.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Advisory Guide</p>
+      <h1 class="display">Buying off-plan, without the folklore.</h1>
+      <p class="page-head__sub">Off-plan is not speculation when the structure is verified. This is how
+        M Realty underwrites every phased purchase we represent — and what we ask of any developer,
+        including the ones we are not retained by.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap legal-body" style="max-width:none">
+      <div class="yield-grid">
+        <div class="prose">
+          <h2 class="h-section">The five checks we run before recommending an off-plan unit</h2>
+          <ul class="amenity-list" style="grid-template-columns:1fr">
+            <li><span></span><b>Title &amp; encumbrance search</b> — registry-verified, not photocopies.</li>
+            <li><span></span><b>Developer track record</b> — at least one completed, occupied scheme of comparable scale.</li>
+            <li><span></span><b>Independent quantity-surveyor certification</b> of draw-down milestones.</li>
+            <li><span></span><b>Escrow with a regulated account</b> — funds released against certified progress only.</li>
+            <li><span></span><b>Exit liquidity test</b> — can this unit be resold at handover? We model it before you buy.</li>
+          </ul>
+          <h2 class="h-section" style="margin-top:44px">How phased payment actually works</h2>
+          <p>A disciplined Kenyan off-plan schedule commits roughly 30% at allocation, 30% at structural
+            completion, and the balance against finishes and handover. Anything that asks for more than
+            30% before foundation sign-off should be questioned — regardless of who is asking.</p>
+          <p>Mortgage buyers typically draw down at the structure stage. We coordinate the valuation
+            calendar with your bank so interest does not accrue on idle equity.</p>
+          <div class="form-actions" style="margin-top:30px">
+            <a class="btn btn--gold" href="listings.html?tab=offplan">See current off-plan inventory</a>
+            <a class="btn btn--wa" id="op-wa" href="#" target="_blank" rel="noopener">Ask an adviser on WhatsApp</a>
+          </div>
+        </div>
+        <div>
+          <table class="plan-table">
+            <thead><tr><th>Risk</th><th>Our control</th></tr></thead>
+            <tbody>
+              <tr><td>Stalled construction</td><td>QS-certified milestones; escrow release only on proof</td></tr>
+              <tr><td>Specification drift</td><td>Finish schedule annexed to the sale agreement</td></tr>
+              <tr><td>Title defects</td><td>Pre-allocation registry search; conditions precedent</td></tr>
+              <tr><td>Over-leveraged developer</td><td>Lender syndicate disclosure reviewed by our counsel</td></tr>
+              <tr><td>Weak exit market</td><td>Comparable absorption data per sub-market</td></tr>
+            </tbody>
+          </table>
+          <figure class="figure" style="margin-top:32px">
+            <img src="assets/img/project-gemini-2.jpg" alt="Gemini Residences construction progress, Westlands" loading="lazy" width="1200" height="800" />
+            <figcaption class="figure__caption">Gemini Residences · Tower A, level 12 — October 2026</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Current off-plan stock -->
+  <section class="section section--stone">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Current Allocation</p>
+          <h2 class="display mt-14">Off-plan units open today</h2>
+        </div>
+        <a class="link-arrow" href="project.html">The Gemini Project
+          <svg width="16" height="10" viewBox="0 0 24 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 5h21m-5-5 5 5-5 5"/></svg></a>
+      </div>
+      <div class="property-grid" id="offplan-grid"></div>
+    </div>
+  </section>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/notify.js"></script>
+  <script src="js/shared.js"></script>
+  <script>
+    (() => {
+      document.getElementById("op-wa").href = MRCONFIG.waText(
+        "Hello M Realty — I'd like to discuss buying off-plan.");
+      const grid = document.getElementById("offplan-grid");
+      const list = MR.properties.filter((p) => p.status === "Off-Plan").slice(0, 3);
+      grid.innerHTML = list.map((p) => MRShared.cardHTML(p)).join("");
+      MRShared.bindFavButtons(grid);
+    })();
+    MRShared.mount("projects");
+  </script>
+</body>
+</html>

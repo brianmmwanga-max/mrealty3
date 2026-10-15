@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investment &amp; Yield Calculator — M Realty Nairobi</title>
+  <meta name="description" content="Model gross and net rental yields, capital appreciation and total return for Nairobi residential purchases. Evidence-based advisory from M Realty." />
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/img/favicon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="M Realty" />
+  <meta property="og:title" content="Nairobi Property Yield Calculator — M Realty" />
+  <meta property="og:description" content="Interactive gross/net yield and total-return modelling for residential purchases in Nairobi." />
+  <meta property="og:image" content="assets/img/hero.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Investment Desk</p>
+      <h1 class="display">Run the numbers before the emotion arrives.</h1>
+      <p class="page-head__sub">Yields in Nairobi's prime sub-markets cluster between 5% and 8% gross.
+        The calculator below uses our live letting-book assumptions — adjust anything, then send the
+        scenario to the desk for a full amortisation schedule.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap yield-grid">
+
+      <!-- Inputs -->
+      <form id="yc-form" novalidate>
+        <div class="calc-grid">
+          <div class="calc-field">
+            <label for="yc-price">Purchase Price (KES)</label>
+            <input type="text" id="yc-price" inputmode="numeric" value="21800000" />
+          </div>
+          <div class="calc-field">
+            <label for="yc-rent">Monthly Rent <output id="yc-rent-out">—</output></label>
+            <input type="range" id="yc-rent" min="60000" max="900000" step="10000" value="170000" />
+          </div>
+          <div class="calc-field">
+            <label for="yc-occupancy">Occupancy Assumption <output id="yc-occ-out">—</output></label>
+            <input type="range" id="yc-occupancy" min="60" max="100" step="5" value="90" />
+          </div>
+          <div class="calc-field">
+            <label for="yc-costs">Annual Costs (service, mgmt, voids) <output id="yc-costs-out">—</output></label>
+            <input type="range" id="yc-costs" min="2" max="20" step="1" value="8" />
+          </div>
+          <div class="calc-field">
+            <label for="yc-growth">Long-run Capital Growth p.a. <output id="yc-growth-out">—</output></label>
+            <input type="range" id="yc-growth" min="0" max="12" step="0.5" value="5" />
+          </div>
+          <div class="calc-field">
+            <label for="yc-years">Holding Period <output id="yc-years-out">—</output></label>
+            <input type="range" id="yc-years" min="2" max="15" step="1" value="7" />
+          </div>
+        </div>
+        <div class="form-actions" style="margin-top:26px">
+          <button class="btn btn--gold" type="button" id="yc-send">Email me this scenario</button>
+          <a class="btn btn--wa" id="yc-wa" href="#" target="_blank" rel="noopener">Discuss on WhatsApp</a>
+        </div>
+        <p class="form-note" id="yc-status" style="margin-top:14px" role="status"></p>
+      </form>
+
+      <!-- Outputs -->
+      <div class="yield-out">
+        <span class="eyebrow">Net Rental Yield</span>
+        <div class="yield-big" id="yc-yield">—</div>
+        <div class="yield-row"><span>Gross yield</span><b id="yc-gross">—</b></div>
+        <div class="yield-row"><span>Effective annual rent</span><b id="yc-effrent">—</b></div>
+        <div class="yield-row"><span>Annual net income</span><b id="yc-net">—</b></div>
+        <div class="yield-row"><span>Projected value in <span id="yc-hyears">7</span> yrs</span><b id="yc-future">—</b></div>
+        <div class="yield-row"><span>Total return (income + growth)</span><b id="yc-total">—</b></div>
+        <div class="yield-row"><span>Payback on income alone</span><b id="yc-payback">—</b></div>
+        <p class="form-note" style="margin-top:20px">Assumptions reflect Q3 2026 letting evidence for
+          Westlands &amp; Kilimani two-bedroom stock. Not financial advice; a model, honestly labelled.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Market context -->
+  <section class="section section--navy">
+    <div class="wrap quote-block reveal">
+      <p class="eyebrow">House View</p>
+      <blockquote style="margin-top:26px">A 6.4% net yield in Westlands beats a headline 9% in an
+        oversupplied corridor. We underwrite absorption, not brochures — and we tell clients when the
+        arithmetic says wait.</blockquote>
+      <cite>— Realtor Brian Mwangi, Founder</cite>
+    </div>
+  </section>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/notify.js"></script>
+  <script src="js/shared.js"></script>
+  <script>
+    (() => {
+      const $ = (id) => document.getElementById(id);
+      const price = $("yc-price"), rent = $("yc-rent"), occ = $("yc-occupancy"),
+            costs = $("yc-costs"), growth = $("yc-growth"), years = $("yc-years");
+      const fmt = (n) => MR.currency(Math.round(n));
+
+      function calc() {
+        const P = Math.max(0, Number(price.value.replace(/[^\d]/g, "")) || 0);
+        const R = Number(rent.value), O = Number(occ.value) / 100, C = Number(costs.value) / 100,
+              G = Number(growth.value) / 100, Y = Number(years.value);
+        $("yc-rent-out").textContent = fmt(R) + " / mo";
+        $("yc-occ-out").textContent = occ.value + "%";
+        $("yc-costs-out").textContent = costs.value + "% of rent";
+        $("yc-growth-out").textContent = growth.value + "% p.a.";
+        $("yc-years-out").textContent = Y + " years";
+        $("yc-hyears").textContent = Y;
+
+        const effRent = R * 12 * O;
+        const net = effRent * (1 - C);
+        const grossY = P ? (effRent / P) * 100 : 0;
+        const netY = P ? (net / P) * 100 : 0;
+        const future = P * Math.pow(1 + G, Y);
+        const incomeTotal = net * Y;
+        const totalReturn = P ? ((future - P + incomeTotal) / P) * 100 : 0;
+        const payback = net > 0 ? P / net : Infinity;
+
+        $("yc-gross").textContent = grossY.toFixed(2) + "%";
+        $("yc-yield").textContent = netY.toFixed(2) + "%";
+        $("yc-effrent").textContent = fmt(effRent);
+        $("yc-net").textContent = fmt(net);
+        $("yc-future").textContent = fmt(future);
+        $("yc-total").textContent = "+" + totalReturn.toFixed(1) + "%";
+        $("yc-payback").textContent = isFinite(payback) ? payback.toFixed(1) + " yrs" : "—";
+
+        return { netY: netY.toFixed(2), grossY: grossY.toFixed(2), P, R, Y };
+      }
+      [price, rent, occ, costs, growth, years].forEach((el) => {
+        el.addEventListener("input", calc); el.addEventListener("change", calc);
+      });
+      const out = calc();
+
+      document.getElementById("yc-wa").href = MRCONFIG.waText(
+        "Hello M Realty — I modelled a KES " + out.P.toLocaleString() +
+        " purchase at " + out.netY + "% net yield over " + out.Y + " years. Can we discuss?");
+
+      document.getElementById("yc-send").addEventListener("click", async () => {
+        const o = calc();
+        await MRNotify.send("Yield scenario request", {
+          price: "KES " + o.P.toLocaleString(),
+          monthlyRent: "KES " + o.R.toLocaleString(),
+          netYield: o.netY + "%",
+          grossYield: o.grossY + "%",
+          holdingPeriod: o.Y + " years"
+        });
+        document.getElementById("yc-status").textContent =
+          "Scenario sent to the investment desk. Provide your email via the concierge or contact form and we'll return the full schedule.";
+      });
+    })();
+    MRShared.mount("investment");
+  </script>
+</body>
+</html>
