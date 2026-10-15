@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Gemini Project — Brookside, Westlands | M Realty</title>
+  <meta name="description" content="Gemini Residences: two towers, 148 residences on Park Lane, Westlands. Availability, specification, and the numbers behind M Realty." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a1c3a'/%3E%3Ctext x='16' y='23' font-family='Georgia' font-size='20' fill='%23c5a059' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Project hero -->
+  <section class="hero" style="min-height:min(78vh,720px)">
+    <div class="hero__media">
+      <img src="assets/img/project-gemini-hero.jpg" alt="Gemini Residences elevation from Park Lane" fetchpriority="high" width="1920" height="1080" />
+      <div class="hero__scrim"></div>
+    </div>
+    <span class="hero__meta">Brookside · Westlands</span>
+    <div class="wrap hero__inner" style="padding-block:120px 64px">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a> / Projects / Gemini</nav>
+      <p class="eyebrow">Featured Development · Exclusively Represented</p>
+      <h1 class="display" style="max-width:14ch">The Gemini Project</h1>
+      <p class="hero__sub">Two towers. One standard. 148 residences on Park Lane at the edge of
+        Brookside parkland — topping out Q3 2026, handover Q2 2027.</p>
+      <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap">
+        <a class="btn btn--gold" href="listings.html?status=Off-Plan">View Availability</a>
+        <a class="btn btn--ghost-light" href="contact.html">Request the Sales Pack</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview editorial -->
+  <section class="section">
+    <div class="wrap split">
+      <div class="prose">
+        <p class="eyebrow">The Brief</p>
+        <h2 class="display" style="margin-block:18px 24px">Conceived for buyers who intend to hold.</h2>
+        <div id="gem-copy"></div>
+      </div>
+      <div>
+        <table class="spec-table" id="gem-specs"></table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery mosaic -->
+  <section class="section--tight" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="gallery" id="gem-gallery"></div>
+    </div>
+  </section>
+
+  <!-- Numbers Behind M Realty -->
+  <section class="stats-band" style="margin-top:clamp(64px,9vw,120px)">
+    <div class="wrap">
+      <div style="padding-top:clamp(48px,6vw,64px)">
+        <p class="eyebrow" style="color:var(--gold)">Track Record</p>
+        <h2 class="display" style="color:#fff;margin-top:14px">The Numbers Behind M Realty</h2>
+      </div>
+      <div class="stats-grid" id="project-stats" style="margin-top:32px"></div>
+    </div>
+  </section>
+
+  <!-- Current availability at Gemini -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Current Availability</p>
+          <h2 class="display" style="margin-top:14px">Released to the register</h2>
+        </div>
+        <a class="link-arrow" href="listings.html?location=Westlands">All Westlands inventory
+          <svg width="16" height="10" viewBox="0 0 24 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 5h21m-5-5 5 5-5 5"/></svg>
+        </a>
+      </div>
+      <div class="property-grid" id="gem-listings"></div>
+    </div>
+  </section>
+
+  <!-- Payment structure + CTA -->
+  <section class="section section--stone">
+    <div class="wrap split">
+      <figure class="figure figure--wide">
+        <img src="assets/img/project-gemini-2.jpg" alt="Gemini podium garden perspective" loading="lazy" width="1400" height="900" />
+        <figcaption class="figure__caption">Podium Garden · Level 04</figcaption>
+      </figure>
+      <div class="prose">
+        <p class="eyebrow">Buying Off-Plan</p>
+        <h2 class="display" style="margin-block:18px 22px">Staged payments, audited escrow.</h2>
+        <p>Purchasers commit 30% on allocation, a further 30% at structure completion, and the balance
+          against handover. All deposits are held in a development-account escrow audited quarterly by
+          the lender syndicate — statements available to registered buyers on request.</p>
+        <ul class="amenity-list" style="grid-template-columns:1fr;margin-top:8px">
+          <li><span></span>Allocation list 48 hours before public release</li>
+          <li><span></span>Finish selection at shell stage (curated palette)</li>
+          <li><span></span>Fixed-price guarantee through structural topping-out</li>
+        </ul>
+        <a class="btn btn--navy" href="contact.html" style="margin-top:26px">Register as a Buyer</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/data.js"></script>
+  <script src="js/shared.js"></script>
+  <script>
+    (() => {
+      const g = MR.projects.gemini;
+      document.getElementById("gem-copy").innerHTML = g.copy.map((p) => `<p>${p}</p>`).join("");
+      document.getElementById("gem-specs").innerHTML = g.specs
+        .map(([k, v]) => `<tr><th>${k}</th><td>${v}</td></tr>`).join("");
+
+      // gallery mosaic
+      const gal = document.getElementById("gem-gallery");
+      gal.innerHTML =
+        `<figure class="gallery__main"><img src="${g.gallery[0]}" alt="Gemini tower elevation" loading="lazy"/></figure>` +
+        g.gallery.slice(1).map((src, i) =>
+          `<figure><img src="${src}" alt="Gemini project view ${i + 2}" loading="lazy"/></figure>`).join("");
+
+      // stats band
+      document.getElementById("project-stats").innerHTML = MR.stats
+        .map(([label, value, note]) => `
+          <div class="stat">
+            <div class="stat__label">${label}</div>
+            <div class="stat__value">${value}</div>
+            <div class="stat__note">${note}</div>
+          </div>`).join("");
+
+      // availability cards
+      const wrap = document.getElementById("gem-listings");
+      const units = MR.properties.filter((p) => p.featuredProject === "gemini");
+      wrap.innerHTML = units.map((p) => MRShared.cardHTML(p)).join("");
+      MRShared.bindFavButtons(wrap);
+    })();
+    MRShared.mount("projects");
+  </script>
+</body>
+</html>

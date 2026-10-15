@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Property Detail | M Realty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a1c3a'/%3E%3Ctext x='16' y='23' font-family='Georgia' font-size='20' fill='%23c5a059' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Sticky key-stats bar -->
+  <div class="pd-bar">
+    <div class="wrap pd-bar__inner">
+      <span class="pd-bar__price" id="pd-price">—</span>
+      <div class="pd-bar__stats">
+        <div class="pd-bar__stat"><b id="pd-beds">—</b><span>Beds</span></div>
+        <div class="pd-bar__stat"><b id="pd-baths">—</b><span>Baths</span></div>
+        <div class="pd-bar__stat"><b id="pd-sqft">—</b><span>Sq Ft</span></div>
+        <div class="pd-bar__stat"><b id="pd-ref" style="font-size:13px;font-family:var(--sans)">—</b><span>Reference</span></div>
+      </div>
+      <button class="pd-save" id="pd-save" type="button">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20.5s-7.5-4.8-9.5-9C1 8 2.6 4.5 6.2 4.5c2.2 0 3.6 1.2 4.4 2.4h.8c.8-1.2 2.2-2.4 4.4-2.4 3.6 0 5.2 3.5 3.7 7-2 4.2-9.5 9-9.5 9z"/></svg>
+        <span>Save</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Hero gallery mosaic -->
+  <section class="gallery" id="gallery" aria-label="Property photo gallery"></section>
+
+  <!-- Main layout -->
+  <main class="wrap" style="padding-block:48px 96px">
+    <div class="pd-layout">
+      <article>
+        <nav class="breadcrumb" style="color:var(--muted)" aria-label="Breadcrumb">
+          <a href="index.html">Home</a> / <a href="listings.html">Listings</a> / <span id="pd-title-crumb">Property</span>
+        </nav>
+        <p class="eyebrow" id="pd-status-line"><span id="pd-status">—</span> · <span id="pd-type">—</span></p>
+        <h1 class="display" id="pd-title" style="margin-block:16px 10px">—</h1>
+        <p class="card__loc" style="font-size:14px"><span id="pd-address">—</span> · Built <span id="pd-year">—</span></p>
+        <p id="pd-blurb" style="margin-top:22px;max-width:64ch"></p>
+
+        <section class="pd-section">
+          <h2 class="display">The Residence</h2>
+          <div class="prose" id="pd-desc"></div>
+        </section>
+
+        <section class="pd-section">
+          <h2 class="display">Specification &amp; Amenities</h2>
+          <ul class="amenity-list" id="pd-amenities"></ul>
+        </section>
+
+        <section class="pd-section">
+          <h2 class="display">Key Facts</h2>
+          <table class="spec-table">
+            <tbody id="pd-specs"></tbody>
+          </table>
+        </section>
+
+        <section class="pd-section">
+          <h2 class="display">Floor Plans</h2>
+          <div class="floorplan-tabs" id="plan-tabs" role="tablist"></div>
+          <figure class="figure figure--wide" style="border:1px solid var(--line)">
+            <img id="floorplan-img" alt="Floor plan" loading="lazy" width="1400" height="1000" />
+          </figure>
+        </section>
+
+        <section class="pd-section">
+          <h2 class="display">Video Tour</h2>
+          <div class="video-frame" id="video-frame"></div>
+          <p class="form-note" style="margin-top:12px">Full walkthrough — 3 min 40 s. Prefer to watch later? The concierge will email you the link.</p>
+        </section>
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="pd-side">
+        <div class="side-card">
+          <div class="side-card__head">Enquire About This Property</div>
+          <div class="side-card__body">
+            <div id="side-agent" style="margin-bottom:20px"></div>
+            <form class="inquiry-form" id="inquiry-form">
+              <input type="hidden" name="property" />
+              <input type="text" required placeholder="Full name" aria-label="Full name" />
+              <input type="email" required placeholder="Email address" aria-label="Email address" />
+              <input type="tel" placeholder="Phone (optional)" aria-label="Phone" />
+              <select aria-label="Preferred contact time">
+                <option>Preferred contact window</option>
+                <option>Morning</option><option>Afternoon</option><option>Evening</option>
+              </select>
+              <textarea placeholder="Tell us about your timeline and requirements…" aria-label="Message"></textarea>
+              <button class="btn btn--gold" type="submit">Send Enquiry</button>
+              <p class="form-note">One named adviser replies — never a call centre. Typical response: same working day.</p>
+            </form>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <div class="side-card__head">Mortgage Calculator</div>
+          <div class="side-card__body">
+            <div class="calc-grid">
+              <div class="calc-field">
+                <label for="mc-price">Purchase Price</label>
+                <input type="text" id="mc-price" inputmode="numeric" />
+              </div>
+              <div class="calc-field">
+                <label for="mc-deposit">Deposit <output id="mc-deposit-out">—</output></label>
+                <input type="range" id="mc-deposit" min="10" max="60" step="5" value="30" />
+              </div>
+              <div class="calc-field">
+                <label for="mc-rate">Interest Rate <output id="mc-rate-out">—</output></label>
+                <input type="range" id="mc-rate" min="4" max="18" step="0.5" value="12.5" />
+              </div>
+              <div class="calc-field">
+                <label for="mc-term">Term <output id="mc-term-out">—</output></label>
+                <input type="range" id="mc-term" min="5" max="25" step="1" value="15" />
+              </div>
+            </div>
+            <div class="calc-result">
+              <span>Monthly Repayment</span>
+              <b id="mc-monthly">—</b>
+            </div>
+            <div class="calc-sub"><span>Amount financed</span><span id="mc-borrow">—</span></div>
+            <div class="calc-sub"><span>Total interest over term</span><span id="mc-total-interest">—</span></div>
+            <p class="form-note" style="margin-top:14px">Indicative only. Our investment desk prepares full amortisation schedules on request.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Similar properties -->
+  <section class="section section--stone">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Comparable Assets</p>
+          <h2 class="display" style="margin-top:14px">You may also consider</h2>
+        </div>
+        <a class="link-arrow" href="listings.html">Browse the register
+          <svg width="16" height="10" viewBox="0 0 24 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 5h21m-5-5 5 5-5 5"/></svg>
+        </a>
+      </div>
+      <div class="similar-strip" id="similar-grid"></div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <img src="" alt="" />
+    <div class="lightbox__bar">
+      <button data-lb-prev>&larr; Prev</button>
+      <span class="lightbox__count">1 / 1</span>
+      <button data-lb-next>Next &rarr;</button>
+      <button data-lb-close>Close &times;</button>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/property.js"></script>
+  <script>MRShared.mount("listings");</script>
+  <script>
+    // Key facts table + breadcrumb crumb (needs p from property.js scope → recompute)
+    (() => {
+      const id = new URLSearchParams(location.search).get("id") || MR.properties[0].id;
+      const p = MR.byId(id);
+      if (!p) return;
+      document.getElementById("pd-title-crumb").textContent = p.title;
+      const rows = [
+        ["Reference", p.id.toUpperCase()],
+        ["Property Type", p.type],
+        ["Status", p.status],
+        ["Location", p.location],
+        ["Internal Area", p.sqft.toLocaleString() + " sq ft"],
+        ["Bedrooms / Bathrooms", p.beds + " / " + p.baths],
+        ["Year Built", p.year],
+        ["Price per sq ft", MR.currency(Math.round(p.price / p.sqft))],
+        ["Tenure", p.featuredProject === "gemini" ? " Leasehold 99 years" : "Freehold"]
+      ];
+      document.getElementById("pd-specs").innerHTML = rows
+        .map(([k, v]) => `<tr><th>${k}</th><td>${v}</td></tr>`).join("");
+    })();
+  </script>
+</body>
+</html>
