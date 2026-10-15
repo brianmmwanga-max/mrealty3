@@ -1499,3 +1499,14 @@ input[type="range"]::-moz-range-thumb {
   .hero__media img { transform: translate3d(0, var(--py, 0), 0) scale(1.06); }
   .card, .card::after, .btn, .wa-float { transition: none; }
 }
+
+/* ---------- form success state (data-notify forms) ---------- */
+.form-success { border: 1px solid rgba(197,160,89,.5); background: rgba(197,160,89,.06); padding: 28px; }
+.form-success p { font-size: 14.5px; color: var(--navy); line-height: 1.65; margin-bottom: 10px; }
+.form-success strong { font-family: var(--serif); font-size: 19px; font-weight: 600; display: block; margin-bottom: 6px; }
+.form-success__actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+
+/* newsletter confirmation */
+.news-ok { color: var(--gold); font-size: 14px; }
+.news-wa { display: inline-block; margin-top: 8px; color: #fff; font-size: 13px; letter-spacing: .08em; text-decoration: underline; text-underline-offset: 3px; }
+.news-wa:hover { color: var(--gold); }

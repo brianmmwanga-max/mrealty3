@@ -5,9 +5,11 @@
 const MRShared = (() => {
   const SAVED_KEY = "mr_saved";
   const LEAD_KEY = "mr_lead";
+  const CFG = window.MRCONFIG || {};
 
   /* ---------- icons ---------- */
   const ICONS = {
+    whatsapp: '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1a12 12 0 0 1-5.7-4.9c-.6-.9-1-2-1-2.7 0-.8.4-1.5.9-1.9.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .5.4l.8 1.8c.1.2 0 .4-.1.5l-.4.5c-.1.2-.2.3 0 .5.5.9 1.6 2 2.6 2.5.2.1.4 0 .5-.1l.6-.7c.2-.2.3-.2.5-.1l1.7.8c.2.1.4.2.4.3 0 .2 0 .8-.2 1.3z"/></svg>',
     heart: '<svg class="heart" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20.5s-7.5-4.8-9.5-9C1 8 2.6 4.5 6.2 4.5c2.2 0 3.6 1.2 4.4 2.4h.8c.8-1.2 2.2-2.4 4.4-2.4 3.6 0 5.2 3.5 3.7 7-2 4.2-9.5 9-9.5 9z"/></svg>',
     bed: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 18v-6h18v6M3 12V7M21 12v-2a2 2 0 0 0-2-2H13v6M3 18v2M21 18v2"/></svg>',
     bath: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-3zM6 12V6a2 2 0 0 1 4 0M7 19l-1 2M17 19l1 2"/></svg>',
@@ -54,8 +56,7 @@ const MRShared = (() => {
     <header class="site-header">
       <div class="wrap header-inner">
         <a class="logo" href="index.html" aria-label="M Realty home">
-          <span class="logo__mark">M</span>
-          <span class="logo__word">M&nbsp;Realty</span>
+          <img class="logo__img" src="assets/img/logo.png" alt="M Realty" width="150" height="48" />
         </a>
         <nav class="main-nav" aria-label="Primary">
           <ul>
@@ -97,17 +98,19 @@ const MRShared = (() => {
         <div class="footer-cols">
           <div class="footer-col">
             <div class="footer-brand">
-              <span class="logo__mark">M</span>
-              <span class="logo__word">M&nbsp;Realty</span>
+              <img class="logo__img logo__img--footer" src="assets/img/logo-light.png" alt="M Realty" width="120" height="40" />
             </div>
             <p>A Nairobi advisory for exceptional residential assets — development
-            sales, prime resale, and institutional counsel since 2013.</p>
+            sales, prime resale, off-plan and investment counsel. Founded and led by
+            Realtor Brian Mwangi.</p>
           </div>
           <div class="footer-col">
             <h4>Quick Links</h4>
             <ul>
               <li><a href="listings.html">All Listings</a></li>
+              <li><a href="offplan.html">Off-Plan Guide</a></li>
               <li><a href="project.html">The Gemini Project</a></li>
+              <li><a href="investment.html">Yield Calculator</a></li>
               <li><a href="about.html">Our Advisers</a></li>
               <li><a href="saved.html">Saved Properties</a></li>
               <li><a href="contact.html">Book a Viewing</a></li>
@@ -116,18 +119,19 @@ const MRShared = (() => {
           <div class="footer-col">
             <h4>Legal</h4>
             <ul>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms of Service</a></li>
-              <li><a href="#">Data Protection</a></li>
-              <li><a href="#">Ethical Sales Policy</a></li>
+              <li><a href="legal.html#privacy">Privacy Policy</a></li>
+              <li><a href="legal.html#terms">Terms of Service</a></li>
+              <li><a href="legal.html#data">Data Protection</a></li>
+              <li><a href="legal.html#ethics">Ethical Sales Policy</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <h4>Contact</h4>
             <ul>
               <li>Park Lane Chambers, 4th Floor<br/>Westlands, Nairobi</li>
-              <li><a href="tel:+254720100000">+254 720 100 000</a></li>
-              <li><a href="mailto:desk@mrealty.co.ke">desk@mrealty.co.ke</a></li>
+              <li><a href="tel:+254183255543">+254 183 255543</a></li>
+              <li><a href="mailto:contacts.mrealtyke@gmail.com">contacts.mrealtyke@gmail.com</a></li>
+              <li><a href="${CFG.whatsappLink}" target="_blank" rel="noopener">Chat on WhatsApp</a></li>
               <li>Mon – Fri 9:00 – 18:00 · Sat by appointment</li>
             </ul>
           </div>
@@ -147,7 +151,7 @@ const MRShared = (() => {
     <section class="concierge" data-concierge role="dialog" aria-label="M Realty Concierge">
       <div class="concierge__head">
         <div>
-          <small>M Realty</small>
+          <small>M Realty · Realtor Brian Mwangi</small>
           <strong>Private Concierge</strong>
         </div>
         <button class="concierge__close" data-concierge-close aria-label="Close">&times;</button>
@@ -155,19 +159,23 @@ const MRShared = (() => {
       <div class="concierge__log" data-concierge-log></div>
       <div class="concierge__choices" data-concierge-choices hidden></div>
       <form class="concierge__form" data-concierge-form hidden>
-        <input type="email" required placeholder="Email to continue" aria-label="Email address" />
-        <button type="submit">Start</button>
+        <input type="text" name="field" required placeholder="Your answer" aria-label="Your answer" autocomplete="on" />
+        <button type="submit" aria-label="Send">&#8594;</button>
       </form>
     </section>`;
 
-  /* ---------- concierge logic ---------- */
+  /* ---------- concierge logic (lead capture + guided flow + FAQ) ---------- */
   function initConcierge() {
     const panel = document.querySelector("[data-concierge]");
     if (!panel) return;
     const log = panel.querySelector("[data-concierge-log]");
     const choicesBox = panel.querySelector("[data-concierge-choices]");
     const form = panel.querySelector("[data-concierge-form]");
-    let stage = "intro";
+    const input = form.querySelector("input");
+
+    const lead = Object.assign({ name: "", email: "", phone: "" },
+      JSON.parse(localStorage.getItem(LEAD_KEY) || "{}"));
+    let answers = {}; // guided Q&A collected this session
 
     const say = (who, text, delay = 0) =>
       new Promise((res) =>
@@ -181,64 +189,198 @@ const MRShared = (() => {
         }, delay)
       );
 
-    const setChoices = (items) => {
+    const setChoices = (items, handler) => {
       choicesBox.innerHTML = "";
       items.forEach((label) => {
         const b = document.createElement("button");
         b.type = "button";
         b.textContent = label;
-        b.addEventListener("click", () => choose(label));
+        b.addEventListener("click", () => handler(label));
         choicesBox.appendChild(b);
       });
       choicesBox.hidden = false;
     };
 
-    async function choose(intent) {
+    const askField = async (placeholder, type, cb) => {
+      input.placeholder = placeholder;
+      input.type = type;
+      form.hidden = false;
+      form.onsubmit = async (e) => {
+        e.preventDefault();
+        const v = input.value.trim();
+        if (!v) return;
+        if (type === "email" && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) {
+          await say("bot", "Please enter a valid email address.", 200);
+          return;
+        }
+        if (type === "tel" && v.replace(/\D/g, "").length < 7) {
+          await say("bot", "That phone number looks incomplete — mind checking it?", 200);
+          return;
+        }
+        form.hidden = true;
+        input.value = "";
+        await say("user", v);
+        cb(v);
+      };
+    };
+
+    /* ---- finalise: send enquiry through MRNotify (email + WhatsApp) ---- */
+    async function finish(extra = {}) {
+      const payload = {
+        Name: lead.name || "—",
+        Email: lead.email || "—",
+        Phone: lead.phone || "—",
+        Intent: answers.intent || "General",
+        Budget: answers.budget || "—",
+        Area: answers.area || "—",
+        Type: answers.type || "—",
+        Preference: answers.pref || "—",
+        ...extra
+      };
+      const res = await MRNotify.send("Concierge Enquiry", payload);
+      await say("bot", `Thank you${lead.name ? ", " + lead.name.split(" ")[0] : ""}. Your enquiry has been sent to Brian's desk — expect a reply the same working day.`, 600);
+      choicesBox.innerHTML = "";
+      const wa = document.createElement("a");
+      wa.className = "msg msg--cta";
+      wa.href = res.waLink;
+      wa.target = "_blank";
+      wa.rel = "noopener";
+      wa.textContent = "Continue on WhatsApp →";
+      choicesBox.appendChild(wa);
+      const again = document.createElement("button");
+      again.type = "button";
+      again.textContent = "Start over";
+      again.addEventListener("click", () => { choicesBox.hidden = true; log.innerHTML = ""; answers = {}; intro(); });
+      choicesBox.appendChild(again);
+      choicesBox.hidden = false;
+    }
+
+    /* ---- guided branches ---- */
+    async function branch(intent) {
+      answers.intent = intent;
       choicesBox.hidden = true;
-      await say("user", intent);
+
+      if (intent === "Speak to Brian") {
+        await say("bot", "Brian personally handles prime resale and development mandates. I'll pass your details across now — he usually calls back within the hour on working days.", 500);
+        return finish({ Note: "Requested a direct call from Brian Mwangi." });
+      }
+      if (intent === "Book Viewing") {
+        await say("bot", "Happy to arrange one. Which area should we look at?", 500);
+        return setChoices(["Westlands", "Kilimani", "Lavington", "Karen / Runda", "Anywhere"], async (area) => {
+          choicesBox.hidden = true;
+          await say("user", area);
+          answers.area = area;
+          await say("bot", "Noted. What day suits you — weekday mornings, weekday evenings, or Saturday?", 400);
+          return setChoices(["Weekday AM", "Weekday PM", "Saturday"], async (slot) => {
+            choicesBox.hidden = true;
+            await say("user", slot);
+            answers.pref = slot;
+            finish({ Note: "Viewing request" });
+          });
+        });
+      }
+      if (intent === "FAQ") {
+        await say("bot", "Ask me anything below, or pick a common question.", 300);
+        return setChoices(
+          ["How do I schedule a viewing?", "Do you handle off-plan investments?", "What are your fees?", "Can I get a mortgage valuation?"],
+          async (q) => {
+            choicesBox.hidden = true;
+            await say("user", q);
+            const a = {
+              "How do I schedule a viewing?": "Pick “Book Viewing” from the main menu, or WhatsApp Brian directly — viewings run Mon–Sat, usually within 48 hours of request.",
+              "Do you handle off-plan investments?": "Yes. We represent select developments including The Gemini Project in Westlands. Our off-plan guide covers payment plans, escrow protection, and projected yields.",
+              "What are your fees?": "For buyers we are typically commission-based from the seller/developer — your advisory is without cost unless a separate mandate is agreed. Nothing is ever hidden.",
+              "Can I get a mortgage valuation?": "We work with valuers registered with the Board of Valuers and can introduce you to bank relationship managers for KES-denominated mortgages."
+            }[q];
+            await say("bot", a, 400);
+            setChoices(["Back to menu"], (l) => { choicesBox.hidden = true; say("bot", l === "Back to menu" ? "Of course." : l, 200).then(mainMenu); });
+          }
+        );
+      }
+
+      /* Buy / Sell / Invest */
       if (intent === "Buy") {
-        await say("bot", "Understood. Share your budget band and preferred sub-market and I'll brief an adviser with a shortlist within the hour.", 500);
-        setChoices(["KES 10–25M", "KES 25–60M", "KES 60M+", "Not sure yet"]);
-      } else if (intent === "Sell") {
-        await say("bot", "We value conservatively and market quietly. Tell me the property type and I'll arrange a CMA this week.", 500);
-        setChoices(["Apartment", "Villa / Bungalow", "Townhouse", "Land"]);
-      } else if (intent === "Invest") {
-        await say("bot", "Our investment desk models net yield, not headline yield. Off-plan at Gemini currently projects 6.4% net on handover.", 500);
-        setChoices(["Send yield report", "Book a call", "Browse listings"]);
-      } else {
-        await say("bot", "Logged. An adviser will follow up on the email you provided — usually the same working day.", 400);
-        setChoices(["Start over"]);
+        await say("bot", "Understood. What budget band are you working with?", 500);
+        return setChoices(["KES 10–25M", "KES 25–60M", "KES 60M+", "Not sure yet"], async (budget) => {
+          choicesBox.hidden = true;
+          await say("user", budget);
+          answers.budget = budget;
+          await say("bot", "And the preferred sub-market?", 400);
+          return setChoices(["Westlands", "Kilimani", "Lavington", "Karen / Runda", "Open to ideas"], async (area) => {
+            choicesBox.hidden = true;
+            await say("user", area);
+            answers.area = area;
+            await askField("Property type? (e.g. 3-bed apartment)", "text", (t) => {
+              answers.type = t;
+              finish();
+            });
+          });
+        });
       }
-      if (intent === "Start over") {
-        log.innerHTML = "";
-        intro();
+      if (intent === "Sell") {
+        await say("bot", "We value conservatively and market quietly. What is the property type?", 500);
+        return setChoices(["Apartment", "Villa / Bungalow", "Townhouse", "Land"], async (type) => {
+          choicesBox.hidden = true;
+          await say("user", type);
+          answers.type = type;
+          await askField("Which area is it located in?", "text", (area) => {
+            answers.area = area;
+            finish({ Note: "CMA / listing request" });
+          });
+        });
+      }
+      if (intent === "Invest") {
+        await say("bot", "Our investment desk models net yield, not headline yield. Off-plan at Gemini currently projects 6.4% net on handover. What ticket size are you considering?", 500);
+        return setChoices(["Under KES 15M", "KES 15–40M", "KES 40M+", "Portfolio level"], async (budget) => {
+          choicesBox.hidden = true;
+          await say("user", budget);
+          answers.budget = budget;
+          await say("bot", "Should we send the yield report by email, or would you prefer a call?", 400);
+          return setChoices(["Email the report", "Prefer a call"], async (pref) => {
+            choicesBox.hidden = true;
+            await say("user", pref);
+            answers.pref = pref;
+            finish({ Note: "Investment desk enquiry" });
+          });
+        });
       }
     }
 
+    function mainMenu() {
+      const items = ["Buy", "Sell", "Invest", "Book Viewing", "Speak to Brian", "Common Questions"];
+      say("bot", "How can we help today?", 300).then(() =>
+        setChoices(items, (label) => {
+          const intent = label === "Common Questions" ? "FAQ" : label;
+          choicesBox.hidden = true;
+          say("user", label, 100).then(() => branch(intent));
+        })
+      );
+    }
+
+    /* ---- intro: capture name → email → phone (remembered after) ---- */
     async function intro() {
-      const lead = JSON.parse(localStorage.getItem(LEAD_KEY) || "null");
-      await say("bot", "Good day. I'm the M Realty private concierge.", 200);
-      if (lead && lead.email) {
-        stage = "intent";
-        await say("bot", `Welcome back, ${lead.name || "there"}. Are you looking to Buy, Sell, or Invest?`, 400);
-        setChoices(["Buy", "Sell", "Invest"]);
-      } else {
-        stage = "email";
-        await say("bot", "Before we begin — which email should we use for your enquiry?", 400);
-        form.hidden = false;
+      await say("bot", "Good day — I'm the M Realty private concierge, representing Realtor Brian Mwangi.", 200);
+      if (lead.email) {
+        await say("bot", `Welcome back, ${lead.name || "there"}.`, 400);
+        return mainMenu();
       }
+      await say("bot", "So an adviser can follow up properly — may I take your full name first?", 400);
+      askField("Full name", "text", (name) => {
+        lead.name = name;
+        localStorage.setItem(LEAD_KEY, JSON.stringify({ ...lead, ts: Date.now(), source: "concierge" }));
+        say("bot", `Thank you, ${name.split(" ")[0]}. Which email should we use for your enquiry?`, 400)
+          .then(() => askField("Email address", "email", (email) => {
+            lead.email = email;
+            localStorage.setItem(LEAD_KEY, JSON.stringify({ ...lead, ts: Date.now(), source: "concierge" }));
+            say("bot", "And a contact number, if you'd prefer a call?", 400)
+              .then(() => askField("Phone — or type 'skip'", "tel", (phone) => {
+                if (phone.toLowerCase() !== "skip") lead.phone = phone;
+                localStorage.setItem(LEAD_KEY, JSON.stringify({ ...lead, ts: Date.now(), source: "concierge" }));
+                mainMenu();
+              }));
+          }));
+      });
     }
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = form.querySelector("input").value.trim();
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return;
-      localStorage.setItem(LEAD_KEY, JSON.stringify({ email, ts: Date.now() }));
-      form.hidden = true;
-      await say("user", email);
-      await say("bot", "Thank you. Are you looking to Buy, Sell, or Invest?", 400);
-      setChoices(["Buy", "Sell", "Invest"]);
-    });
 
     document.querySelectorAll("[data-concierge-open]").forEach((b) =>
       b.addEventListener("click", () => {
@@ -249,6 +391,34 @@ const MRShared = (() => {
     panel.querySelector("[data-concierge-close]").addEventListener("click", () =>
       panel.classList.remove("is-open")
     );
+  }
+
+  /* ---------- generic form wiring (any form[data-notify="Type"]) ---------- */
+  function successHTML(res) {
+    return `
+      <div class="form-success">
+        <p><strong>Thank you — your enquiry has been received.</strong></p>
+        <p>A member of Brian's desk will reply to the email provided, typically the same working day.</p>
+        <div class="form-success__actions">
+          <a class="btn btn--wa" href="${res.waLink}" target="_blank" rel="noopener">Continue on WhatsApp</a>
+          <a class="btn btn--outline-gold" href="${res.mailto}">Send by Email instead</a>
+        </div>
+      </div>`;
+  }
+
+  async function wireForm(f, type) {
+    const btn = f.querySelector("button[type=submit]");
+    if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = "Sending…"; }
+    const data = {};
+    new FormData(f).forEach((v, k) => { data[k] = typeof v === "string" ? v.trim() : v; });
+    /* remember lead for concierge personalisation */
+    if (data.email) {
+      localStorage.setItem(LEAD_KEY, JSON.stringify({
+        name: data.name || "", email: data.email, phone: data.phone || "", ts: Date.now(), source: type
+      }));
+    }
+    const res = await MRNotify.send(type, data);
+    f.innerHTML = successHTML(res);
   }
 
   /* ---------- mount ---------- */
@@ -275,15 +445,24 @@ const MRShared = (() => {
       a.addEventListener("click", () => document.body.classList.remove("nav-open"))
     );
 
-    // newsletter demo handler
+    // newsletter — routes through MRNotify (email + WhatsApp queue)
     document.querySelectorAll("[data-newsletter]").forEach((f) =>
-      f.addEventListener("submit", (e) => {
+      f.addEventListener("submit", async (e) => {
         e.preventDefault();
         const input = f.querySelector("input");
         localStorage.setItem(LEAD_KEY, JSON.stringify({ email: input.value, ts: Date.now(), source: "newsletter" }));
-        f.innerHTML = '<p style="color:#c5a059;font-size:14px">Request received — our register opens weekly.</p>';
+        const res = await MRNotify.send("Off-Market Access request", { Email: input.value });
+        f.innerHTML = `<p class="news-ok">Request received — our register opens weekly.</p>
+          <a class="news-wa" href="${res.waLink}" target="_blank" rel="noopener">Confirm on WhatsApp →</a>`;
       })
     );
+
+    // floating WhatsApp launcher (all pages)
+    if (!document.querySelector(".wa-float")) {
+      document.body.insertAdjacentHTML("beforeend", `
+        <a class="wa-float" href="${CFG.whatsappLink}" target="_blank" rel="noopener"
+           aria-label="Chat with M Realty on WhatsApp" title="Chat on WhatsApp">${ICONS.whatsapp}</a>`);
+    }
 
     // delegate data-notify forms added after mount (injected content)
     document.addEventListener("submit", (e) => {
